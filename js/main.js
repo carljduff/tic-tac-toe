@@ -1,3 +1,6 @@
+let player = ['X', 'O']
+let round = 0;
+
 class Model {
     constructor() {
         this.board = [];
@@ -13,8 +16,9 @@ class Model {
         ];
         this.currentPlayer = [];
         this.endGame = [];
+        // this.player = ['X', 'O'];
+        // this.round = 0;
     }
-
 
 
 }
@@ -26,26 +30,29 @@ class View {
         this.title.textContent = 'Tic-Tac-Toe'
         this.container = this.createElement('div')
         this.turnTitle = this.createElement('p')
-        // this.turnTitle.textContent = `It's ${players} turn!`
         this.container.className = 'container'
-        // this.grid = document.querySelectorAll('.grid')
         this.resetButton = this.createElement('button')
         this.resetButton.textContent = 'Reset Game'
         this.app.append(this.title, this.container, this.turnTitle, this.resetButton)
         
-
         
     }
     
-    turnEvent = (fn) => {
-        this.grid.addEventListener('click', fn)
-    }
-    
+   
     buildBoard = (board) => {
         for (let i = 0; i < 9; i++) {
          board.push(document.createElement('div'))
          board[i].className = 'grid';
          this.container.append(board[i]);
+         board[i].addEventListener('click', () => {
+            if (round % 2 == 0) {
+              board[i].innerText = player[0];
+              round++ 
+            } else {
+              board[i].innerText = player[1];
+              round++
+            }
+          });
         }
 
     }
@@ -70,7 +77,7 @@ class Controller {
         this.m = model;
         this.v = view;
         this.v.buildBoard(this.m.board)
-        this.v.turnEvent(this.buildBoard)
+        
     }
 
     turn = () => {

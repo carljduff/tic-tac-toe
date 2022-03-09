@@ -23,13 +23,7 @@ let round = 0;
 //   } 
 // }
  
-    function turn() {
-      if (Event.type = 'click' && round == 0) {
-       
-        round++ 
-        // console.log(round)
-      }
-    }
+  
     
     
 
@@ -46,16 +40,26 @@ let round = 0;
     // let title = document.getElementById('title');
     document.body.appendChild(container);
     
-     function buildBoard() {
+    function buildBoard() {
         // let clicked = false;
-        for (i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
           board.push(document.createElement('div'))
           board[i].className = 'grid';
           container.append(board[i]);
-          board[i].innerText = '';
-          board[i].addEventListener('click', turn); //giving event listener to each of them
+          // board[i].innerText = '';
+          board[i].addEventListener('click', () => {
+            // console.log(board[i])
+            // console.log(i)
+            if (round % 2 == 0) {
+              board[i].innerText = player[0];
+              round++ 
+            } else {
+              board[i].innerText = player[1];
+              round++
+            }
+          }); //giving event listener to each of them
         }
-      }
+    }
   
   
   buildBoard();
