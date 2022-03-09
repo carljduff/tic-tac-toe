@@ -16,8 +16,8 @@ class Model {
         ];
         this.currentPlayer = [];
         this.endGame = [];
-        // this.player = ['X', 'O'];
-        // this.round = 0;
+        this.player = ['X', 'O'];
+        this.round = 0;
     }
 
 
