@@ -1,14 +1,3 @@
-<!-- HTML Rendering
-
-element.innerHTML =  new html content	Change the inner HTML of an element
-element.attribute = new value	Change the attribute value of an HTML element
-element.style.property = new style	Change the style of an HTML element
-
-document.createElement(element)	Create an HTML element
-document.removeChild(element)	Remove an HTML element
-document.appendChild(element)	Add an HTML element
-document.replaceChild(new, old)	Replace an HTML element
-document.write(text)	Write into the HTML output stream -->
 
 ## Things to Keep in Mind
 
@@ -24,10 +13,26 @@ document.write(text)	Write into the HTML output stream -->
 * Two players (X & O).
 * Must use at least one Class.
 
+## Procedures
 
-## What Needs to Happen
+1. Board will be built with 9 tiles, display the title and restart button.
+2. Tiles will be clickable.
+3. Player 1 will start by clicking on a tile.
+4. After player 1 clicks on a tile, it will fill the innertext with the player symbol.
+5. After the innertext is filled, it will be player 2's turn.
+6. Player 2 will click a tile to be filled with their symbol.
+7. This process repeats until the fifth click.
+8. After the fifth click, check for a win.
+9. If a winning condition is met, display the player that won.
+10. If not then continue with the next player.
+11. Check after each click to see if a winning condition is met.
+12. If all nine tiles are filled and a winning condition has not been met, display that the game was a tie.
+13. The Restart Game button will clear the state and take it back to the original state.
+14. Repeat.
 
-# Model
+# Object Oriented
+
+## Model
 1. Board Data
 * Board will be an array [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -43,22 +48,18 @@ document.write(text)	Write into the HTML output stream -->
     [2, 4, 6]
 ]
 
-3. Turn Data
-* Stores whose turn it is.
-
-*(Not for sure if I need this)*
-4. Current Player Data
+3. Current Player Data
 * Stores the information for who's the current player. 
+
+4. State Data
+* The data that will update the state 
 
 *(Not for sure if I need this)*
 5. End Game Data
 * Stores the information for when the game is ended.
 
-*(Not for sure if I need this)*
-6. State Data
-* The data that will update the state 
 
-# View
+## View
 1. Display Board
 * There will be a _function_ or _something_ that builds the board in the controller.
 
@@ -80,7 +81,7 @@ document.write(text)	Write into the HTML output stream -->
 
 
 
-# Controller
+## Controller
 1. Board
 * The board must be dynamically built using javascript.
 * Must be clickable.
@@ -95,9 +96,12 @@ document.write(text)	Write into the HTML output stream -->
 
 3. Turn 
 * Is the current player X or O? 
+* Player X will turn the innerText of the tile to "X".
+* Player O will turn the innerText of the tile to "O".
 * Who just clicked? If X clicked then it's O's turn.
 
 4. Display Winner 
+* When the fifth click is clicked, start checking for winning conditions. 
 * When one player's symbols hit a winning condition, the game is won.
 * If no one hits a winning condition, the game is a tie.
 
@@ -107,6 +111,17 @@ document.write(text)	Write into the HTML output stream -->
 * All tiles become clickable again.
 * All data is reset.
 
+<!-- HTML Rendering
+
+element.innerHTML =  new html content	Change the inner HTML of an element
+element.attribute = new value	Change the attribute value of an HTML element
+element.style.property = new style	Change the style of an HTML element
+
+document.createElement(element)	Create an HTML element
+document.removeChild(element)	Remove an HTML element
+document.appendChild(element)	Add an HTML element
+document.replaceChild(new, old)	Replace an HTML element
+document.write(text)	Write into the HTML output stream -->
 
 
 
