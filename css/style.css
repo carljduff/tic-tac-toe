@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    width: 606px;
+    height: 606px;
+}
+
+.grid1 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid2 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid3 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid4 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid5 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid6 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid7 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid8 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.grid9 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
