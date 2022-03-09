@@ -60,7 +60,7 @@ document.write(text)	Write into the HTML output stream -->
 
 # View
 1. Display Board
-* There will be a _function_ or _something_ that builds the board.
+* There will be a _function_ or _something_ that builds the board in the controller.
 
 2. Restart Game Button (resets state)
 * The state must be reset to restart the game.
@@ -81,13 +81,34 @@ document.write(text)	Write into the HTML output stream -->
 
 
 # Controller
-1. Build the Board
+1. Board
 * The board must be dynamically built using javascript.
-* 
-* Build the Turn 
-* 
-* 
-* 
+* Must be clickable.
+* 3 x 3 Grid:
+* 606px H&W for container, 200px with 1px border for each tile, flex-wrap.
+* Array [0-8].
+* Array.map will do the same thing to every index.
+
+2. Tiles
+* Once clicked on a tile, the player's symbol must be added.
+* The tile must be disabled and cannot be clicked on until reset.
+
+3. Turn 
+* Is the current player X or O? 
+* Who just clicked? If X clicked then it's O's turn.
+
+4. Display Winner 
+* When one player's symbols hit a winning condition, the game is won.
+* If no one hits a winning condition, the game is a tie.
+
+5. Restart Game
+* A function that will reset the state data.
+* The board must be cleared.
+* All tiles become clickable again.
+* All data is reset.
+
+
+
 
 
 
