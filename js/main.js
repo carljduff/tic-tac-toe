@@ -20,6 +20,10 @@ class Model {
         this.round = 0;
     }
 
+    // updateBoard = (move) => {
+    //     console.log({move, element: this.board[move].textContent});
+    // }
+
 
 }
 
@@ -28,31 +32,25 @@ class View {
         this.app = this.getElement('#app')
         this.title = this.createElement('h1')
         this.title.textContent = 'Tic-Tac-Toe'
-        this.container = this.createElement('div')
         this.turnTitle = this.createElement('p')
+        this.turnTitle.textContent = `X's Turn!`
+        this.container = this.createElement('div')
         this.container.className = 'container'
         this.resetButton = this.createElement('button')
         this.resetButton.textContent = 'Reset Game'
-        this.app.append(this.title, this.container, this.turnTitle, this.resetButton)
-        
+        this.app.append(this.title, this.turnTitle, this.container, this.resetButton)
         
     }
     
    
-    buildBoard = (board) => {
+    buildBoard = (board, handleCellEvent) => {
         for (let i = 0; i < 9; i++) {
-         board.push(document.createElement('div'))
-         board[i].className = 'grid';
-         this.container.append(board[i]);
-         board[i].addEventListener('click', () => {
-            if (round % 2 == 0) {
-              board[i].innerText = player[0];
-              round++ 
-            } else {
-              board[i].innerText = player[1];
-              round++
-            }
-          });
+            let tile = document.createElement('div');
+            tile.setAttribute('data-index', i);
+            board.push(tile)
+            board[i].className = 'grid';
+            this.container.append(board[i]);
+            board[i].addEventListener('click', handleCellEvent);
         }
 
     }
@@ -76,14 +74,31 @@ class Controller {
     constructor(model, view) {
         this.m = model;
         this.v = view;
-        this.v.buildBoard(this.m.board)
+        this.v.buildBoard(this.m.board, this.handleCellEvent)
         
     }
 
-    turn = () => {
-        console.log('test')
-    }
 
+    handleCellEvent = (e) => {
+        let targetIndex = e.target.dataset.index;
+        // console.log(targetIndex)
+        let tilePlace = this.m.board[targetIndex];
+        // console.log(this.turnTitle)
+    // }
+    
+    // playerTurn = () => {
+
+        if (round % 2 == 0) {
+            tilePlace.innerText = player[0];
+            turnTitle.innerText = "O's TURN";
+            console.log(turnTitle)
+            round++ 
+        } else {
+            tilePlace.innerText = player[1];
+            turnTitle.innerText = "X's TURN";
+            round++
+        }
+    }
 }
 
 
