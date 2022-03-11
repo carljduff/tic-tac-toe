@@ -1,5 +1,5 @@
-let player = ['X', 'O']
-let round = 0;
+// let player = ['X', 'O']
+// let round = 0;
 
 class Model {
     constructor() {
@@ -43,21 +43,22 @@ class View {
         this.resetButton = this.createElement('button')
         this.resetButton.className = 'btn'
         this.resetButton.textContent = 'Reset Game'
+        // this.element = document.getElementById(e.target.dataset)
         this.app.append(this.title, this.turnTitle, this.container, this.resetButton)
         
     }
     
   
    
-    buildBoard = (board, handleCellEvent, checkWin) => {
+    buildBoard = (board, handleCellEvent) => {
         for (let i = 0; i < 9; i++) {
             let tile = document.createElement('div');
-            tile.setAttribute('data-index', i);
+            tile.setAttribute('data-index', i); //data attribute 
             tile.setAttribute('id', 'grid')
             board.push(tile)
             board[i].className = 'grid';
             this.container.append(board[i]);
-           
+            board[i].addEventListener('click', handleCellEvent);
         }
 
     }
@@ -81,7 +82,7 @@ class Controller {
     constructor(model, view) {
         this.m = model;
         this.v = view;
-        this.v.buildBoard(this.m.board, this.handleCellEvent, this.checkWin)
+        this.v.buildBoard(this.m.board, this.handleCellEvent)
         // this.v.resetBoard(this.m.board, this.resetGame)
         
     }
@@ -93,25 +94,26 @@ class Controller {
         
        
 
-        if (round % 2 == 0) {
-            tilePlace.innerText = player[0];
+        if (this.m.round % 2 == 0) {
+            tilePlace.innerText = this.m.player[0];
             this.v.turnTitle.innerText = "O's TURN";
-            round++ 
+            this.m.round++ 
 
             
         } else {
-            tilePlace.innerText = player[1];
+            tilePlace.innerText = this.m.player[1];
             this.v.turnTitle.innerText = "X's TURN";
-            round++
+            this.m.round++
         }
     }
 
+   
     
-    checkWin = () => {
-        if(this.m.board[0].innerText == 'X' && this.m.board[1].innerText == 'X' && this.m.board[2].innerText == 'X') {
-            console.log('X WINS!')
-        }
-    }
+    // checkWin = () => {
+    //     if(this.m.board[0].innerText == 'X' && this.m.board[1].innerText == 'X' && this.m.board[2].innerText == 'X') {
+    //         console.log('X WINS!')
+    //     }
+    // }
 
 }
 
