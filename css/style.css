@@ -21,9 +21,15 @@
     text-align: center;
 }
 
-.btn {
+.buttonContainer {
+    display: flex;
     justify-content: center;
+    text-align: center;
 }
+
+/* .btn {
+    align-items: center;
+} */
 
 
 
