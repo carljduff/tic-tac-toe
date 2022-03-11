@@ -11,15 +11,10 @@ class Model {
             [0, 4, 8],
             [2, 4, 6]
         ];
-        // this.endGame = [];
+    
         this.player = ['X', 'O'];
         this.round = 0;
-        
     }
-
-    
-    
-
 }
 
 class View {
@@ -37,9 +32,6 @@ class View {
         this.turnTitle = this.createElement('p')
         this.turnTitle.className = 'turn';
         this.turnTitle.innerText = `X's Turn`;
-        // this.winOrTie = this.createElement('p')
-        // this.winOrTie.className = 'tie';
-        // this.winOrTie.textContent = ``;
         this.container = this.createElement('div')
         this.container.className = 'container'
         this.buttonContainer = this.createElement('div')
@@ -102,16 +94,14 @@ class Controller {
         }
         
         this.checkWin();
-        // if (this.m.round > 8) { //change to incorporate winning condition 
-        //     this.v.turnTitle.textContent = `It's a Tie!`;
-        // }
+       
     }
 
    checkWin = () => {
        
         if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
             this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
-        } else if (this.m.round > 8) { //change to incorporate winning condition 
+        } else if (this.m.round > 8) { 
                 this.v.turnTitle.textContent = `It's a Tie!`;
         }
     }
