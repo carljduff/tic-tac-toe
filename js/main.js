@@ -15,6 +15,8 @@ class Model {
         this.player = ['X', 'O'];
         this.round = 0;
     }
+
+    //need getters and setters
 }
 
 class View {
@@ -23,7 +25,7 @@ class View {
     }
     
     
-    
+    // buildBoard = (placeholders...not set yet)
     buildBoard = (board, handleCellEvent) => {
         this.app = this.getElement('#app')
         this.title = this.createElement('h1')
@@ -43,8 +45,8 @@ class View {
         this.app.append(this.title, this.turnTitle, this.container, this.resetButton)
         for (let i = 0; i < 9; i++) {
             let tile = document.createElement('div');
-            tile.setAttribute('data-index', i); 
-            tile.setAttribute('id', 'grid')
+            tile.setAttribute('data-index', i); //data-attribute.. data can then be used in the page's JavaScript to create a more engaging user experience
+            tile.setAttribute('id', 'grid') 
             board.push(tile)
             board[i].className = 'grid';
             this.container.append(board[i]);
@@ -70,22 +72,28 @@ class View {
 }
 
 class Controller {
+    //Giving the controller access to the view and model
     constructor(model, view) {
         this.m = model;
         this.v = view;
+        //setting the parameters in buildboard
         this.v.buildBoard(this.m.board, this.handleCellEvent)
         
     } 
 
 
     handleCellEvent = (e) => {
-        let targetIndex = e.target.dataset.index;
+        //get the data index of the tile when clicked
+        let targetIndex = e.target.dataset.index; 
+        //accessing the data index of the board array in model
         let tilePlace = this.m.board[targetIndex];
         
-        
+        //X starts...even rounds are X's turn, odd rounds are O's turn
         if (this.m.round % 2 == 0) {
+        //making the innertext of the board index to X or O
             tilePlace.innerText = this.m.player[0];
             this.v.turnTitle.innerText = "O's TURN";
+        //increase the round after the click 
             this.m.round++   
         } else {
             tilePlace.innerText = this.m.player[1];
@@ -97,6 +105,8 @@ class Controller {
        
     }
 
+
+    //checking for a win...needs updated to read data from model instead of being hard coded
    checkWin = () => {
        
         if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
@@ -112,6 +122,5 @@ class Controller {
 }
 
 
-
-
+//creating a new instance
 const app = new Controller(new Model(), new View())
