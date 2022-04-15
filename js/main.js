@@ -93,6 +93,18 @@ class Controller {
         //making the innertext of the board index to X or O
             tilePlace.innerText = this.m.player[0];
             this.v.turnTitle.innerText = "O's TURN";
+            // console.log(this.m.winData[0])
+
+            for(let i = 0; i < this.m.winData.length; i++) {
+                for(let j=0; j < this.m.winData.length; j++) {
+                    // console.log(this.m.winData[i][j])
+                    if(tilePlace.innerText == this.m.player[0] && tilePlace == this.m.winData[i][j]) {
+                        console.log(tilePlace)
+                    }
+                }
+            }
+            
+            
         //increase the round after the click 
             this.m.round++   
         } else {
@@ -101,7 +113,7 @@ class Controller {
             this.m.round++
         }
         
-        this.checkWin();
+        // this.checkWin();
        
     }
 
@@ -109,11 +121,21 @@ class Controller {
     //checking for a win...needs updated to read data from model instead of being hard coded
    checkWin = () => {
        
-        if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
-            this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
-        } else if (this.m.round > 8) { 
-                this.v.turnTitle.textContent = `It's a Tie!`;
+        //get the data index of the tile when clicked
+        if (tilePlace.innerText == this.m.player[0] || tilePlace.innerText == this.m.player[1]) {
+            console.log('d')
         }
+        //accessing the data index of the board array in model
+        
+        // if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
+        //     this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
+        // } else if (this.m.round > 8) { 
+        //         this.v.turnTitle.textContent = `It's a Tie!`;
+        // }
+
+        // for(let i = 0; i < this.m.winData.length; i++) {
+        //     console.log(i)
+        // }
     }
     
 
