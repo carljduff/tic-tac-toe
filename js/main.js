@@ -14,6 +14,7 @@ class Model {
     
         this.player = ['X', 'O'];
         this.round = 0;
+        this.game = 0;
     }
 
     //need getters and setters
@@ -26,9 +27,10 @@ class View {
     
     
     // buildBoard = (placeholders...not set yet)
-    buildBoard = (board, handleCellEvent) => {
+    buildBoard = (board, handleCellEvent, reset) => {
         this.app = this.getElement('#app')
         this.title = this.createElement('h1')
+        this.title.id = 'title'
         this.title.className = 'title';
         this.title.textContent = 'Tic-Tac-Toe'
         this.turnTitle = this.createElement('p')
@@ -42,6 +44,8 @@ class View {
         this.resetButton = this.createElement('button')
         this.resetButton.className = 'btn'
         this.resetButton.textContent = 'Reset Game'
+        this.resetButton.id = 'resetbtn'
+        this.resetButton.addEventListener('click', reset)
         this.app.append(this.title, this.turnTitle, this.container, this.resetButton)
         for (let i = 0; i < 9; i++) {
             let tile = document.createElement('div');
@@ -51,11 +55,19 @@ class View {
             board[i].className = 'grid';
             this.container.append(board[i]);
             board[i].addEventListener('click', handleCellEvent);
-           
+            
         }
 
+    
     }
 
+    resetDom = () => {
+        this.app.removeChild(this.container)
+        this.app.removeChild(this.title)
+        this.app.removeChild(this.turnTitle)
+    
+       
+    }
     createElement(tag, className) {
         const element = document.createElement(tag)
         if (className) element.classList.add(className)
@@ -77,7 +89,7 @@ class Controller {
         this.m = model;
         this.v = view;
         //setting the parameters in buildboard
-        this.v.buildBoard(this.m.board, this.handleCellEvent)
+        this.v.buildBoard(this.m.board, this.handleCellEvent, this.reset)
         
     } 
 
@@ -87,22 +99,15 @@ class Controller {
         let targetIndex = e.target.dataset.index; 
         //accessing the data index of the board array in model
         let tilePlace = this.m.board[targetIndex];
+        // document.getElementById('grid').style.pointerEvents ='none'
         
         //X starts...even rounds are X's turn, odd rounds are O's turn
         if (this.m.round % 2 == 0) {
         //making the innertext of the board index to X or O
             tilePlace.innerText = this.m.player[0];
             this.v.turnTitle.innerText = "O's TURN";
-            // console.log(this.m.winData[0])
 
-            for(let i = 0; i < this.m.winData.length; i++) {
-                for(let j=0; j < this.m.winData.length; j++) {
-                    // console.log(this.m.winData[i][j])
-                    if(tilePlace.innerText == this.m.player[0] && tilePlace == this.m.winData[i][j]) {
-                        console.log(tilePlace)
-                    }
-                }
-            }
+          
             
             
         //increase the round after the click 
@@ -113,29 +118,26 @@ class Controller {
             this.m.round++
         }
         
-        // this.checkWin();
+       
        
     }
 
+    reset = () => {
+        // this.m.board = []
+        // this.v.buildBoard()
+        
+        this.v.resetDom()
+        // this.v.buildBoard()
+        this.m.board = []
+        this.m.round = 0
+        this.v.buildBoard(this.m.board, this.handleCellEvent, this.reset)
+        
 
-    //checking for a win...needs updated to read data from model instead of being hard coded
+        
+    }
    checkWin = () => {
        
-        //get the data index of the tile when clicked
-        if (tilePlace.innerText == this.m.player[0] || tilePlace.innerText == this.m.player[1]) {
-            console.log('d')
-        }
-        //accessing the data index of the board array in model
-        
-        // if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
-        //     this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
-        // } else if (this.m.round > 8) { 
-        //         this.v.turnTitle.textContent = `It's a Tie!`;
-        // }
-
-        // for(let i = 0; i < this.m.winData.length; i++) {
-        //     console.log(i)
-        // }
+    
     }
     
 
