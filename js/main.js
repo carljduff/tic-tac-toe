@@ -15,6 +15,7 @@ class Model {
     this.player = ["X", "O"];
     this.round = 0;
     this.game = 0;
+    this.gameOver = false;
   }
 
   //need getters and setters
@@ -97,7 +98,8 @@ class Controller {
     let tilePlace = this.m.board[targetIndex];
 
         // document.getElementById('grid').disabled = true;
-    
+    let board = this.m.board
+    let player = this.m.player
     let elems = document.getElementsByClassName("grid");
 
     for(let i = 0; i < elems.length; i++) {
@@ -106,6 +108,8 @@ class Controller {
 
       }
     }
+
+   
     //X starts...even rounds are X's turn, odd rounds are O's turn
     if (this.m.round % 2 == 0) {
       //making the innertext of the board index to X or O
@@ -119,6 +123,24 @@ class Controller {
       tilePlace.innerText = this.m.player[1];
       this.v.turnTitle.innerText = "X's TURN";
       this.m.round++;
+    }
+
+    // if (this.m.round > 8) {
+    //   this.v.turnTitle.innerText = "It's a tie! Game Over!"
+    //   this.v.resetButton.textContent = 'Play Again'
+    // }
+
+    if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
+            this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
+            this.v.resetButton.textContent = 'Play Again'
+            this.m.gameOver = true;
+            document.getElementById("container").disabled = true;
+        } else if (this.m.round > 8) { 
+                this.v.turnTitle.textContent = `It's a Tie!`;
+        }
+
+    if(this.m.gameOver == true) {
+      document.getElementById("container").disabled = true;
     }
   };
 
