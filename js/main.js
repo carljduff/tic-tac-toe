@@ -51,13 +51,14 @@ class View {
       this.resetButton
     );
     for (let i = 0; i < 9; i++) {
-      let tile = document.createElement("div");
+      let tile = document.createElement("button");
       tile.setAttribute("data-index", i); //data-attribute.. data can then be used in the page's JavaScript to create a more engaging user experience
       tile.setAttribute("id", "grid");
       board.push(tile);
       board[i].className = "grid";
       this.container.append(board[i]);
       board[i].addEventListener("click", handleCellEvent);
+
     }
   };
 
@@ -95,6 +96,16 @@ class Controller {
     //accessing the data index of the board array in model
     let tilePlace = this.m.board[targetIndex];
 
+        // document.getElementById('grid').disabled = true;
+    
+    let elems = document.getElementsByClassName("grid");
+
+    for(let i = 0; i < elems.length; i++) {
+      if(targetIndex == elems[i].dataset.index) {
+        elems[i].disabled = true;
+
+      }
+    }
     //X starts...even rounds are X's turn, odd rounds are O's turn
     if (this.m.round % 2 == 0) {
       //making the innertext of the board index to X or O
@@ -108,15 +119,11 @@ class Controller {
       tilePlace.innerText = this.m.player[1];
       this.v.turnTitle.innerText = "X's TURN";
       this.m.round++;
-      // document.getElementById('container').style.pointerEvents = 'none'
     }
   };
 
   reset = () => {
     this.v.resetDom();
-    // this.m.board = []
-    // this.m.round = 0
-    // this.v.buildBoard(this.m.board, this.handleCellEvent, this.reset)
     const app = new Controller(new Model(), new View());
   };
 
