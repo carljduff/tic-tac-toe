@@ -115,7 +115,6 @@ class Controller {
       //making the innertext of the board index to X or O
       tilePlace.innerText = this.m.player[0];
       this.v.turnTitle.innerText = "O's TURN";
-      // document.getElementById('grid').style.pointerEvents = 'none'
 
       //increase the round after the click
       this.m.round++;
@@ -125,28 +124,37 @@ class Controller {
       this.m.round++;
     }
 
-    // if (this.m.round > 8) {
-    //   this.v.turnTitle.innerText = "It's a tie! Game Over!"
-    //   this.v.resetButton.textContent = 'Play Again'
-    // }
+   
 
     if (this.m.board[0].innerText == this.m.player[0] && this.m.board[1].innerText == this.m.player[0] && this.m.board[2].innerText == this.m.player[0]) {
             this.v.turnTitle.innerText = `${this.m.player[0]} wins!`
-            this.v.resetButton.textContent = 'Play Again'
             this.m.gameOver = true;
-            document.getElementById("container").disabled = true;
+          
         } else if (this.m.round > 8) { 
                 this.v.turnTitle.textContent = `It's a Tie!`;
-        }
+                this.m.gameOver = true;
 
-    if(this.m.gameOver == true) {
-      document.getElementById("container").disabled = true;
+        }
+  
+
+    if (this.m.gameOver == true) {
+      this.v.resetButton.textContent = 'Play Again'
+      let elems = document.getElementsByClassName("grid");
+      for(let i = 0; i < elems.length; i++) {
+        elems[i].disabled = true;
+      }
     }
+
   };
 
   reset = () => {
     this.v.resetDom();
     const app = new Controller(new Model(), new View());
+    if(this.v.resetButton.textContent == 'Play Again') {
+      this.m.game++;
+      console.log(this.m.game)
+
+    }
   };
 
   checkWin = () => {};
