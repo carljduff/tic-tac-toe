@@ -1,37 +1,81 @@
+body {
+    background-color: #44697A;
+}
 .grid {
     border: 1px solid black;
     height: 200px;
     width: 200px;
     cursor: pointer;
     font-size: 100px;
-    text-align: center;    
+    text-align: center; 
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     height: 635px;
     width: 635px;
     margin: auto;
     
 }
 
-.title, .turn {
-    text-align: center;
+.title, .turn, .game, .score {
+    text-align: center; 
+    border: 1px solid white;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: black;
+    color: white;
 }
 
-/* .buttonContainer {
+
+.turn, .game { 
+    width: 100px;
+}
+
+.score {
+    width: 225px;
+}
+.title {
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    width: 250px;
+    margin: auto;
+}
+.btn-container {
     display: flex;
+    flex-flow: row;
     justify-content: center;
     text-align: center;
     
-} */
-
-.btn {
-    align-items: center;
-    border: 1px solid black;
 }
 
+.btn {
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    
+}
+
+.btn:hover {
+    color: white;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.game {
+    border: 1px solid white;
+}
 
 
 
